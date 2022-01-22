@@ -19,8 +19,8 @@ Benchmarking test about acceleration of numpy and parallel processing in gpu usi
 
 | Function | Data | Numpy | Numba using Jit <br> (Excluding compile time) | CUDA | Code |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| numpy.tanh | 1e4 by 1e4 matrix | 111 µs ± 569 ns per loop | 3.41 µs ± 52.4 ns per loop | . | . |
-| numpy.multiply | 
+| numpy.tanh | 1e4 by 1e4 matrix | 111 µs ± 569 ns per loop | 3.41 µs ± 52.4 ns per loop | . | **[code](jit/benchmark_tanh.ipy)** |
+| numpy.multiply | 8192 by 8192 matrix | 87 ms ± 3.11 ms per loop | . | 175 µs ± 2.24 µs per loop <br> (block, thread = 32, 256) | **[code](cuda-jit/benchmark_cuda-jit_multiply.ipy)** |
 
 ### Measuring 
 
