@@ -1,0 +1,35 @@
+from numba import jit
+import numpy as np
+
+# Input Data 
+n_dim = int(1e4)
+n_dim_re = int(np.sqrt(n_dim))
+
+x = np.arange(n_dim).reshape(n_dim_re, n_dim_re)
+
+def numpy_tanh(a):
+    trace = 0.0
+    for i in range(a.shape[0]):
+        trace += np.tanh(a[i, i])
+    
+    return trace
+
+@jit(nopython=True)
+def numba_tanh(a):
+    trace = 0.0
+    for i in range(a.shape[0]):
+        trace += np.tanh(a[i, i])
+    
+    return trace
+
+# Data Plot
+print("Data \n", x)
+
+# Numpy
+print("Numpy :")
+%timeit numpy_tanh(x) # Measering
+
+# Numba
+print("Numba :")
+numba_tanh(x) # Compilation
+%timeit numba_tanh(x) # Measering
