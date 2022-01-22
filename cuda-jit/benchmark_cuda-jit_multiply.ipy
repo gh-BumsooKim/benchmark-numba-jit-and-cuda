@@ -1,0 +1,30 @@
+from numba import jit, vectorize, cuda
+import numpy as np
+
+x = np.ones(8192*8192).reshape(8192, 8192).astype(np.float32)
+
+def numpy_multi(a):
+    a = np.multiply(a[:, :], 1)
+    return a
+
+@cuda.jit
+def numba_multi(a, out):
+    
+    x, y = cuda.grid(2)
+    out[x][y] = a[x][y] * 2
+    
+# Numpy
+print("Numpy :")    
+%timeit numpy_multi(x)
+
+
+# Numba
+block, thread = 32, 256
+x_device = cuda.to_device(x)
+#out = cuda.device_array_like(x_device)
+out = np.zeros_like(x).astype(np.float32)
+out_device = cuda.to_device(out)
+
+print("Numba :")    
+%timeit numba_multi[block, thread](x_device, out_device); cuda.synchronize
+x_host = out_device.copy_to_host()
