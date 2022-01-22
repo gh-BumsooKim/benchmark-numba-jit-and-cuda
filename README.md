@@ -11,16 +11,26 @@ Benchmarking test about acceleration of numpy and parallel processing in gpu usi
 - Compiler : Numba 0.54 for Numpy and CUDA
 - Measuring : timeit module
 
-### Text List
+### Test List
 
 - Optimal Compile in Local **CPU** with jit
 - Concurrency in **GPU** with cuda
+
+### List
+
+| Function | Data | Numpy | Numba using Jit <br> (Excluding compile time) | CUDA | Code |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| numpy.tanh | 1e4 by 1e4 matrix | 111 µs ± 569 ns per loop | 3.41 µs ± 52.4 ns per loop | . | . |
+| numpy.multiply | 
+
+### Measuring 
 
 <hr>
 
 Optimized Compilation in CPU :
 ```python
-fron numba import jit
+from numba import jit
+import numpry as np
 
 @jit
 def func(x):
