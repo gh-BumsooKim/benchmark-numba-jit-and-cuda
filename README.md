@@ -6,7 +6,6 @@ Benchmarking test about acceleration of numpy and parallel processing in gpu usi
 - OS : Windows 10 64bit
 - CPU : Intel i9-10900
 - GPU : Nvidia RTX 3080 10GB
-
 - Program Lang : Python 3.9.7
 - Compiler : Numba 0.54 for Numpy and CUDA
 - Measuring : timeit module
